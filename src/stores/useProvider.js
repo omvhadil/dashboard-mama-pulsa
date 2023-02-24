@@ -7,6 +7,13 @@ export const useProviderStore = defineStore("provider", {
     provider: [],
     providerId: {},
   }),
+
+  getters: {
+    jmlProvider() {
+      return this.provider.length
+    }
+  },
+
   actions: {
     // ======= get =======
     async getProvider() {

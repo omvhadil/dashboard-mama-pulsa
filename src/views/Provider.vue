@@ -59,7 +59,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <h2 class="text-dark mb-4">Provider</h2>
+  <h3 class="text-success mb-4">Provider</h3>
   <div class="row">
     <div class="col-xl-12 col-12">
       <div class="card h-100 card-lg border-0">

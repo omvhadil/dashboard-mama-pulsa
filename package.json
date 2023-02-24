@@ -15,8 +15,10 @@
     "boxicons": "^2.1.4",
     "pinia": "^2.0.28",
     "remixicon": "^2.5.0",
+    "vee-validate": "^4.7.4",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

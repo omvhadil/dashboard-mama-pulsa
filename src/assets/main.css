@@ -4,3 +4,6 @@ body{
   font-weight: 300;
   color: #889397;
 }
+.text-small{
+  font-size: .8rem;
+}

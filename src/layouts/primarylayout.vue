@@ -3,6 +3,7 @@
 import Sidebar from "../components/sidebar.vue";
 import SidebarMobille from "../components/SidebarMobile.vue";
 import { RouterView } from "vue-router";
+import Header from "../components/Header.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import { RouterView } from "vue-router";
     <Sidebar />
 
     <div class="container-content mt-5 mt-xl-0">
+      <Header />
       <div class="container p-3">
         <RouterView />
       </div>
