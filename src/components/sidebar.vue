@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 import { dataMenu } from "../constans";
 </script>
 <template>
-  <nav class="navbar-vertical-nav d-none d-xl-block position-fixed">
+  <nav class="navbar-vertical-nav d-none d-md-block position-fixed">
     <div class="navbar-vertical bg-white border-end">
       <div class="p-3">
         <a

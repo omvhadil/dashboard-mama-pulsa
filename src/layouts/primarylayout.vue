@@ -1,17 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Sidebar from "../components/sidebar.vue";
-import SidebarMobille from "../components/SidebarMobile.vue";
+// import SidebarMobille from "../components/SidebarMobile.vue";
 import { RouterView } from "vue-router";
 import Header from "../components/Header.vue";
 </script>
 
 <template>
   <div class="wrapper">
-    <SidebarMobille />
+    <!-- <SidebarMobille /> -->
     <Sidebar />
 
-    <div class="container-content mt-5 mt-xl-0">
+    <div class="container-content">
       <Header />
       <div class="container p-3">
         <RouterView />
@@ -29,7 +29,7 @@ import Header from "../components/Header.vue";
   width: calc(100% - 280px);
   margin-left: 280px;
 }
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .container-content {
     width: 100%;
     margin-left: 0;

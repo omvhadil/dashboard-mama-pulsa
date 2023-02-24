@@ -23,7 +23,7 @@ export const useAuthStore = defineStore("auth", {
           // yang mana localStorage hanya menerima data string JSON.
           localStorage.setItem("Auth", JSON.stringify(res.data)),
             (this.userData = res.data);
-          router.push("/");
+          router.push("/dashboard");
         })
         .catch((error) => {
           alert(error);

@@ -5,7 +5,7 @@ export const dataMenu = [
             {
                 menu: 'Dashboard',
                 icon: 'ri-dashboard-line',
-                path: '/'
+                path: '/dashboard'
             },
             {
                 menu: 'Transaksi',
@@ -30,7 +30,7 @@ export const dataMenu = [
             {
                 menu: 'Log Out',
                 icon: 'ri-login-box-line',
-                path: '/login'
+                path: '/'
             },
         ]
     }

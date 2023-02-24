@@ -14,12 +14,12 @@ onMounted(() => {
     >Hai {{ useAuthStore().user.name }}, Wellcome In Dashboard</P
   >
 
-  <div class="row p-3">
-    <div class="col-4">
+  <div class="row p-3 gy-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="bg-info p-3 d-flex">
         <div class="fs-1 text-white"><i class="ri-shield-flash-line"></i></div>
         <div class="ms-auto text-white">
-          <h3 class="m-0">04</h3>
+          <h3 class="m-0">0</h3>
           <p>Transaksi</p>
         </div>
       </div>
@@ -27,7 +27,7 @@ onMounted(() => {
         Total Transaksi
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="bg-success p-3 d-flex">
         <div class="fs-1 text-white"><i class="ri-shield-check-line"></i></div>
         <div class="ms-auto text-white">
@@ -39,11 +39,11 @@ onMounted(() => {
         Total Provider
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="bg-warning p-3 d-flex">
-        <div class="fs-1 text-white"><i class="ri-shield-check-line"></i></div>
+        <div class="fs-1 text-white"><i class="ri-shield-user-line"></i></div>
         <div class="ms-auto text-white">
-          <h3 class="m-0">01</h3>
+          <h3 class="m-0">0</h3>
           <p>Admin</p>
         </div>
       </div>
