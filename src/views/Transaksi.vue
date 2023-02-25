@@ -1,9 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Modal from "../components/Modal.vue";
-import { dataTransaksi } from "../constans";
-
+import { useTransaksiStore } from "../stores";
 const showModal = ref();
 
 const onStatus = (status) => {
@@ -18,6 +17,10 @@ const onStatus = (status) => {
       return "badge text-bg-dark";
   }
 };
+
+onMounted(() => {
+  useTransaksiStore().getTransaksi();
+});
 </script>
 <template>
   <h3 class="text-success mb-4">Transaksi</h3>
@@ -62,10 +65,13 @@ const onStatus = (status) => {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in dataTransaksi" :key="index">
+                <tr
+                  v-for="(item, index) in useTransaksiStore().allTransaksi"
+                  :key="item.id"
+                >
                   <th scope="row">{{ index + 1 }}</th>
-                  <td>{{ item.provider }}</td>
-                  <td>{{ item.noTelp }}</td>
+                  <td>{{ item.provider_name }}</td>
+                  <td>{{ item.no_hp }}</td>
                   <td>{{ item.nominal }}</td>
                   <td>{{ item.catatan }}</td>
                   <td>
