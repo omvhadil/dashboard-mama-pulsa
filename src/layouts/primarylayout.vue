@@ -14,7 +14,12 @@ import Header from "../components/Header.vue";
     <div class="container-content">
       <Header />
       <div class="container p-3">
-        <RouterView />
+        <router-view v-slot="{ Component }">
+          <transition name="slide-right">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+        <!-- <RouterView /> -->
       </div>
     </div>
   </div>
