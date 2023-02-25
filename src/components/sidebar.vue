@@ -2,6 +2,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { dataMenu } from "../constans";
+import { useAuthStore } from "../stores"
 </script>
 <template>
   <nav class="navbar-vertical-nav d-none d-md-block position-fixed">
@@ -31,6 +32,13 @@ import { dataMenu } from "../constans";
               >
             </li>
           </div>
+          <button
+            @click="useAuthStore().logout()"
+            class="nav-link p-2 d-flex align-items-center rounded border-0 bg-white"
+          >
+            <i class="ri-login-box-line me-2"></i>
+            Log Out
+          </button>
         </ul>
       </div>
     </div>

@@ -29,10 +29,7 @@ export const useProviderStore = defineStore("provider", {
     },
     // ======== post =======
     async PostProvider(data) {
-      await Api.post("/provider/", data).then(() => {
-        this.getProvider();
-        alert("data berhasil ditambah");
-      });
+      await Api.post("/provider/", data);
     },
     // ======== Put show =======
     async showProvider(id) {
@@ -41,11 +38,8 @@ export const useProviderStore = defineStore("provider", {
       });
     },
     // ======== Put =======
-    async PutProvider(data) {
-      await Api.put("/provider/", data).then(() => {
-        this.getProvider();
-        alert("data berhasil ditambah");
-      });
+    async PutProvider(id, data) {
+      await Api.put("/provider/"+ id, data)
     },
   },
 });

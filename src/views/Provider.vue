@@ -11,6 +11,7 @@ const data = reactive({
   provider: "",
   providerEdit: "",
   activeEdit: "",
+  providerId: null,
 });
 
 // ====== Tambah Profider
@@ -19,22 +20,37 @@ const addProvider = () => {
     name: data.provider,
     active: "y",
   };
-  useProviderStore().PostProvider(form);
+  useProviderStore()
+    .PostProvider(form)
+    .then(() => {
+      showModal.value = false;
+      useProviderStore().getProvider();
+      data.provider = null;
+    });
 };
 
 // ====== Get detail Provider
 const change = (id) => {
   showModalEdit.value = true;
+  data.providerId = id;
   useProviderStore().showProvider(id);
 };
 
 // ====== Edit provider
-const updateProvider = () => {
+const updateProvider = async () => {
   const form = {
-    name: data.provider,
+    name: data.providerEdit,
     active: data.activeEdit,
   };
-  useProviderStore().PutProvider(form);
+  const id = data.providerId;
+  await useProviderStore()
+    .PutProvider(id, form)
+    .then(() => {
+      showModalEdit.value = false;
+      useProviderStore().getProvider();
+      data.providerEdit = null;
+      data.activeEdit = null;
+    });
 };
 
 // ====== Hapus provider

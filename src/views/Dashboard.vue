@@ -4,14 +4,13 @@ import { onMounted } from "vue";
 import { useAuthStore, useProviderStore } from "../stores";
 
 onMounted(() => {
-  useAuthStore().getUser();
   useProviderStore().getProvider();
 });
 </script>
 <template>
   <h3 class="text-success m-0">Dashboard</h3>
-  <P class="text-small text-success"
-    >Hai {{ useAuthStore().user.name }}, Wellcome In Dashboard</P
+  <span class="text-small text-success"
+    >Hai {{ useAuthStore().user.name }}, Wellcome In Dashboard</span
   >
 
   <div class="row p-3 gy-4">

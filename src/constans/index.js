@@ -20,17 +20,14 @@ export const dataMenu = [
             {
                 menu: 'Provider',
                 icon: 'ri-booklet-line',
-                path: '/provider'
+                path: '/provider',
+                action: {}
             },
             {
                 menu: 'Users',
                 icon: 'ri-user-3-line',
-                path: '/users'
-            },
-            {
-                menu: 'Log Out',
-                icon: 'ri-login-box-line',
-                path: '/'
+                path: '/users',
+                action: {}
             },
         ]
     }

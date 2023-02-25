@@ -1,6 +1,6 @@
 import axios from "axios";
 import route from "../router"
-import { useAuthStore }from "../stores/Auth"
+import { useAuthStore }from "../stores"
 
 
 export const Api = axios.create({
@@ -23,7 +23,7 @@ Api.interceptors.response.use(
   (error) => {
     switch(error.response.status){
       case 401:
-      route.push('/login');
+      route.push('/');
       break;
       default:
         alert("ada kesalahan")

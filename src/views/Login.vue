@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { useAuthStore } from "../stores/Auth.js";
+import { useAuthStore } from "../stores";
 import * as Yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
@@ -24,7 +24,7 @@ const onSubmit = (values) => {
 </script>
 <template>
   <div style="height: 100vh" class="d-flex align-items-center">
-    <div class="content border p-4 rounded mx-auto my-auto">
+    <div class="content border p-4 rounded mx-lg-auto my-lg-auto mx-3">
       <h2 class="text-dark mb-5">Login</h2>
       <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors }">
         <div class="mb-3">
@@ -51,13 +51,22 @@ const onSubmit = (values) => {
           />
           <ErrorMessage name="password" class="invalid-feedback" />
         </div>
-        <button type="submit" class="btn btn-success mt-3">Sign In</button>
+        <button
+          v-if="useAuthStore().isLoading"
+          type="submit"
+          class="btn btn-success disabled mt-3"
+        >
+          Loading ...
+        </button>
+        <button v-else type="submit" class="btn btn-success mt-3">
+          Sign In
+        </button>
       </Form>
     </div>
   </div>
 </template>
 <style scoped>
 .content {
-  width: 500px;
+  width: 400px;
 }
 </style>
