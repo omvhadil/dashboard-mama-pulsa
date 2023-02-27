@@ -2,7 +2,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { dataMenu } from "../constans";
-import { useAuthStore } from "../stores"
+import { useAuthStore } from "../stores";
 </script>
 <template>
   <nav class="navbar-vertical-nav d-none d-md-block position-fixed">
@@ -25,7 +25,7 @@ import { useAuthStore } from "../stores"
                 v-for="(items, idx) in dataMenu[index].menus"
                 :key="idx"
                 :to="items.path"
-                exact-active-class="actived"
+                exact-active-class="bg-success-subtle bg-opacity-25 text-success-emphasis"
                 class="nav-link p-2 d-flex align-items-center rounded"
                 ><i class="me-2" :class="items.icon"></i
                 >{{ items.menu }}</RouterLink

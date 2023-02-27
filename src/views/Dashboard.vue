@@ -2,6 +2,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useAuthStore, useProviderStore } from "../stores";
+import ProgresBar from "../components/ProgressBar.vue";
 
 onMounted(() => {
   useProviderStore().getProvider();
@@ -9,6 +10,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
+    <ProgresBar :isLoading="useAuthStore().isLoading"></ProgresBar>
     <h3 class="text-success m-0">Dashboard</h3>
     <span class="text-small text-success"
       >Hai {{ useAuthStore().user.name }}, Wellcome In Dashboard</span
@@ -24,7 +26,9 @@ onMounted(() => {
             <p>Transaksi</p>
           </div>
         </div>
-        <div class="bg-info opacity-75 text-small p-1 text-center text-white">
+        <div
+          class="bg-info bg-opacity-75 text-white text-small p-1 text-center"
+        >
           Total Transaksi
         </div>
       </div>

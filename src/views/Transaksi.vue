@@ -3,12 +3,13 @@
 import { ref, onMounted } from "vue";
 import Modal from "../components/Modal.vue";
 import { useTransaksiStore } from "../stores";
+import ProgresBar from "../components/ProgressBar.vue";
 const showModal = ref();
 
 const onStatus = (status) => {
   switch (status) {
     case "pending":
-      return "badge text-bg-warning";
+      return "badge text-dark bg-warning-subtle";
     case "success":
       return "badge text-bg-success";
     case "cancel":
@@ -24,6 +25,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
+    <ProgresBar :isLoading="useTransaksiStore().isLoading"></ProgresBar>
     <h3 class="text-success mb-4">Transaksi</h3>
     <div class="row">
       <div class="col-xl-12 col-12">

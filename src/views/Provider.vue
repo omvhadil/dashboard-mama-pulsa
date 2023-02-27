@@ -2,7 +2,9 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import Modal from "../components/Modal.vue";
+import Swal from "sweetalert2";
 import { useProviderStore } from "../stores/useProvider";
+import ProgresBar from "../components/ProgressBar.vue";
 
 const showModal = ref();
 const showModalEdit = ref();
@@ -32,9 +34,25 @@ const addProvider = () => {
 // ====== Get detail Provider
 const change = (id) => {
   showModalEdit.value = true;
-  data.providerId = id;
-  useProviderStore().showProvider(id);
+  useProviderStore()
+    .showProvider(id)
+    .then((res) => {
+      console.log(res.data);
+      data.providerId = id;
+      data.providerEdit = res.data.name;
+      data.activeEdit = res.data.active;
+    });
 };
+
+// ======= get provider id =====
+// const getProviderId = async () => {
+//   useProviderStore()
+//     .showProvider(data.providerId)
+//     .then((data) => {
+//       data.providerEdit = data.name;
+//       data.activeEdit = data.active;
+//     });
+// };
 
 // ====== Edit provider
 const updateProvider = async () => {
@@ -55,7 +73,20 @@ const updateProvider = async () => {
 
 // ====== Hapus provider
 const del = (id) => {
-  useProviderStore().delProvider(id);
+  Swal.fire({
+    title: "Warning!",
+    text: "Apakah kamu yakin?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire("Deleted!", "Provider berhasil dihapus", "success");
+      useProviderStore().delProvider(id);
+    }
+  });
 };
 
 // ====== Style status provider
@@ -72,10 +103,12 @@ const onStatus = (status) => {
 
 onMounted(() => {
   useProviderStore().getProvider();
+  // useProviderStore().showProvider();
 });
 </script>
 <template>
   <div>
+    <ProgresBar :isLoading="useProviderStore().isLoading"></ProgresBar>
     <h3 class="text-success mb-4">Provider</h3>
     <div class="row">
       <div class="col-xl-12 col-12">

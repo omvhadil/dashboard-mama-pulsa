@@ -51,16 +51,8 @@ const onSubmit = (values) => {
           />
           <ErrorMessage name="password" class="invalid-feedback" />
         </div>
-        <button
-          v-if="useAuthStore().isLoading"
-          type="submit"
-          class="btn btn-success disabled mt-3"
-        >
-          Loading ...
-        </button>
-        <button v-else type="submit" class="btn btn-success mt-3">
-          Sign In
-        </button>
+
+        <button type="submit" class="btn btn-success mt-3">Sign In</button>
       </Form>
     </div>
   </div>

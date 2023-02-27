@@ -5,7 +5,8 @@ import { Api } from "../plugin/api";
 
 export const useTransaksiStore = defineStore("transaksi", {
   state: () => ({
-    allTransaksi: []
+    allTransaksi: [],
+    isLoading: false
   }),
   getters: {
 
@@ -13,6 +14,7 @@ export const useTransaksiStore = defineStore("transaksi", {
   actions: {
     // ========= get transaksi ====
     async getTransaksi() {
+      this.isLoading = true
         await Api.get('/transaksi').then((res) => {
             this.allTransaksi = res.data
         })

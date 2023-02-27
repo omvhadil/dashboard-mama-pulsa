@@ -16,9 +16,9 @@ export const useAuthStore = defineStore("auth", {
   },
   actions: {
     // ====== Login =====
-    async PostLogin(data) {
+    async PostLogin(senddata) {
       this.isLoading = true,
-      await Api.post("/login", data)
+      await Api.post("/login", senddata)
         .then((res) => {
           // kita simpan/kirim responsenya ke local storage,
           // "JSON.stringify" fungsinya untuk merubah string javascript menjadi string JSON,
@@ -28,13 +28,16 @@ export const useAuthStore = defineStore("auth", {
           router.push("/dashboard");
           this.isLoading = false
         })
-        .catch((error) => {
-          alert(error);
+        .catch(() => {
+          this.isLoading = false
+          alert("Email or Password is wrong");
         });
     },
     // ====== Get User =====
     async getUser() {
+      this.isLoading = true
       await Api.get("/user").then((res) => {
+        this.isLoading = false
         this.user = res.data;
       });
     },

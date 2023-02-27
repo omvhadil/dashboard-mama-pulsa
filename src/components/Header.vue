@@ -23,10 +23,10 @@ onMounted(() => {
       </button>
     </div>
     <div
-      class="col-3 col-lg-2 d-flex align-items-center gap-1 p-1 text-dark ms-auto"
+      class="col-7 col-lg-5 d-flex align-items-center gap-1 p-1 text-dark ms-auto"
       style="cursor: pointer"
     >
-      <i class="ri-shield-user-line"></i>{{ useAuthStore().user.name
+      <i class="ri-shield-user-line ms-auto"></i>{{ useAuthStore().user.name
       }}<i class="ri-arrow-drop-down-line"></i>
     </div>
   </div>

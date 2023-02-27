@@ -5,7 +5,7 @@ import { Api } from "../plugin/api";
 export const useProviderStore = defineStore("provider", {
   state: () => ({
     provider: [],
-    providerId: {},
+    isLoading: true
   }),
 
   getters: {
@@ -17,8 +17,11 @@ export const useProviderStore = defineStore("provider", {
   actions: {
     // ======= get =======
     async getProvider() {
+      this.isLoading = true
       await Api.get("/provider").then((res) => {
+        this.isLoading = false;
         this.provider = res.data;
+        // console.log(res.data);
       });
     },
     // ======== delete =======
@@ -33,9 +36,7 @@ export const useProviderStore = defineStore("provider", {
     },
     // ======== Put show =======
     async showProvider(id) {
-      await Api.get("/provider/" + id).then((data) => {
-        this.providerId = data;
-      });
+      return await Api.get("/provider/" + id);
     },
     // ======== Put =======
     async PutProvider(id, data) {
