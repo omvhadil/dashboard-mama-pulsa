@@ -4,7 +4,6 @@ import { ref, onMounted, reactive } from "vue";
 import Modal from "../components/Modal.vue";
 import Swal from "sweetalert2";
 import { useProviderStore } from "../stores/useProvider";
-import ProgresBar from "../components/ProgressBar.vue";
 
 const showModal = ref();
 const showModalEdit = ref();
@@ -93,9 +92,9 @@ const del = (id) => {
 const onStatus = (status) => {
   switch (status) {
     case "y":
-      return "badge text-bg-success";
+      return "badge text-success-emphasis bg-success-subtle";
     case "n":
-      return "badge text-bg-danger";
+      return "badge text-danger-emphasis bg-danger-subtle";
     default:
       return "badge text-bg-dark";
   }
@@ -108,7 +107,6 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    <ProgresBar :isLoading="useProviderStore().isLoading"></ProgresBar>
     <h3 class="text-success mb-4">Provider</h3>
     <div class="row">
       <div class="col-xl-12 col-12">
@@ -157,7 +155,7 @@ onMounted(() => {
                     <!-- <td><img :src="items.image" style="height: 30px" /></td> -->
                     <td>{{ items.name }}</td>
                     <td>
-                      <span :class="onStatus(items.avtive)">{{
+                      <span :class="onStatus(items.active)">{{
                         items.active
                       }}</span>
                     </td>
@@ -202,7 +200,13 @@ onMounted(() => {
     </Teleport>
     <!-- Modal put -->
     <Teleport to="body">
-      <Modal :show="showModalEdit" @close="showModalEdit = false">
+      <Modal
+        :show="showModalEdit"
+        @close="
+          (showModalEdit = false),
+            ((data.providerEdit = null), (data.activeEdit = null))
+        "
+      >
         <template #body>
           <h2 class="text-dark mb-4">Edit Provider</h2>
           <form @submit.prevent="updateProvider">

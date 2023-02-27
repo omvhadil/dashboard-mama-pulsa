@@ -2,12 +2,13 @@
 import { defineStore } from "pinia";
 import { Api } from "../plugin/api";
 import router from "../router";
+import {isLoading} from "./Loader"
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     userData: JSON.parse(localStorage.getItem("Auth") || null),
     user: {},
-    isLoading: false,
+    isLoading: isLoading,
   }),
   getters: {
     getToken() {

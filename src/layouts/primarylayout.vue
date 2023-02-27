@@ -7,7 +7,7 @@ import Header from "../components/Header.vue";
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper overflow-y-hidden">
     <!-- <SidebarMobille /> -->
     <Sidebar />
 

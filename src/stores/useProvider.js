@@ -1,11 +1,12 @@
 // stores/counter.js
 import { defineStore } from "pinia";
 import { Api } from "../plugin/api";
+import {isLoading} from "./Loader"
 
 export const useProviderStore = defineStore("provider", {
   state: () => ({
     provider: [],
-    isLoading: true
+    isLoading: isLoading
   }),
 
   getters: {
