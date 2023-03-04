@@ -1,10 +1,7 @@
-<script setup>
-import MyLoading from "./components/Loader.vue";
-</script>
-
+<script setup></script>
 <template>
+  <Vue3ProgressBar />
   <RouterView />
-  <MyLoading />
 </template>
 
 <style scoped></style>

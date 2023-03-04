@@ -32,14 +32,13 @@ const addProvider = () => {
 
 // ====== Get detail Provider
 const change = (id) => {
-  showModalEdit.value = true;
   useProviderStore()
     .showProvider(id)
     .then((res) => {
-      console.log(res.data);
       data.providerId = id;
       data.providerEdit = res.data.name;
       data.activeEdit = res.data.active;
+      showModalEdit.value = true;
     });
 };
 
@@ -82,8 +81,14 @@ const del = (id) => {
     confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire("Deleted!", "Provider berhasil dihapus", "success");
       useProviderStore().delProvider(id);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Data berhasil dihapus",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   });
 };
@@ -150,6 +155,7 @@ onMounted(() => {
                   <tr
                     v-for="(items, index) in useProviderStore().provider"
                     :key="items.id"
+                    @dblclick="change(items.id)"
                   >
                     <th scope="row">{{ index + 1 }}</th>
                     <!-- <td><img :src="items.image" style="height: 30px" /></td> -->
@@ -160,10 +166,10 @@ onMounted(() => {
                       }}</span>
                     </td>
                     <td class="d-flex gap-1">
-                      <button @click="change(items.id)" class="btn btn-primary">
-                        <i class="ri-edit-2-line"></i>
-                      </button>
-                      <button @click="del(items.id)" class="btn btn-danger">
+                      <button
+                        @click="del(items.id)"
+                        class="btn btn-danger btn-sm"
+                      >
                         <i class="ri-delete-bin-6-line"></i>
                       </button>
                     </td>

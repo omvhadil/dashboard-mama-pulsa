@@ -31,8 +31,8 @@ import Header from "../components/Header.vue";
   min-height: 100%;
 }
 .container-content {
-  width: calc(100% - 280px);
-  margin-left: 280px;
+  width: calc(100% - 250px);
+  margin-left: 250px;
 }
 @media (max-width: 768px) {
   .container-content {

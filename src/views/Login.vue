@@ -23,42 +23,48 @@ const onSubmit = (values) => {
 };
 </script>
 <template>
-  <div style="height: 100vh" class="d-flex align-items-center">
-    <div class="content border p-4 rounded mx-lg-auto my-lg-auto mx-3">
-      <h2 class="text-dark mb-5">Login</h2>
-      <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors }">
-        <div class="mb-3">
-          <h6 for="email" class="form-label">Email</h6>
-          <Field
-            name="email"
-            type="email"
-            class="form-control"
-            :class="{ 'is-invalid': errors.email }"
-            id="email"
-            aria-placeholder="Masukkan email"
-          />
-          <ErrorMessage name="email" class="invalid-feedback" />
+  <section
+    class="login"
+    style="background-image: linear-gradient(60deg, green, yellow)"
+  >
+    <div class="row m-0 d-flex align-items-center" style="height: 100vh">
+      <div class="col-lg-4 mx-auto">
+        <div class="shadow-sm border rounded-3 p-4 bg-white">
+          <h4 class="text-dark text-center mb-4">Login Here</h4>
+          <Form
+            @submit="onSubmit"
+            :validation-schema="schema"
+            v-slot="{ errors }"
+          >
+            <div class="mb-3">
+              <h6 for="email" class="form-label">Email</h6>
+              <Field
+                name="email"
+                type="email"
+                class="form-control"
+                :class="{ 'is-invalid': errors.email }"
+                id="email"
+                aria-placeholder="Masukkan email"
+              />
+              <ErrorMessage name="email" class="invalid-feedback" />
+            </div>
+            <div class="mb-3">
+              <h6 for="password" class="form-label">Password</h6>
+              <Field
+                name="password"
+                type="password"
+                class="form-control"
+                :class="{ 'is-invalid': errors.password }"
+                id="password"
+                aria-placeholder="Masukkan password"
+              />
+              <ErrorMessage name="password" class="invalid-feedback" />
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Sign In</button>
+          </Form>
         </div>
-        <div class="mb-3">
-          <h6 for="password" class="form-label">Password</h6>
-          <Field
-            name="password"
-            type="password"
-            class="form-control"
-            :class="{ 'is-invalid': errors.password }"
-            id="password"
-            aria-placeholder="Masukkan password"
-          />
-          <ErrorMessage name="password" class="invalid-feedback" />
-        </div>
-
-        <button type="submit" class="btn btn-success mt-3">Sign In</button>
-      </Form>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
-<style scoped>
-.content {
-  width: 400px;
-}
-</style>
+<style scoped></style>

@@ -34,7 +34,7 @@ import { useAuthStore } from "../stores";
           </div>
           <button
             @click="useAuthStore().logout()"
-            class="nav-link p-2 d-flex align-items-center rounded border-0 bg-white"
+            class="p-2 d-flex align-items-center rounded border-0 bg-transparent text--color"
           >
             <i class="ri-login-box-line me-2"></i>
             Log Out
@@ -46,14 +46,9 @@ import { useAuthStore } from "../stores";
 </template>
 <style scoped>
 .navbar-vertical-nav {
-  width: 280px;
+  width: 250px;
 }
 .navbar-vertical {
   height: 100vh;
-}
-.actived {
-  background-color: #ceefce;
-  color: #044504 !important;
-  font-weight: 400;
 }
 </style>

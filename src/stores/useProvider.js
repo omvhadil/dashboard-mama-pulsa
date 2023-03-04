@@ -1,12 +1,16 @@
 // stores/counter.js
 import { defineStore } from "pinia";
+import { inject } from "vue";
 import { Api } from "../plugin/api";
 import {isLoading} from "./Loader"
+
+// let progress = inject("progress")
 
 export const useProviderStore = defineStore("provider", {
   state: () => ({
     provider: [],
-    isLoading: isLoading
+    isLoading: isLoading,
+    progress: inject("progress")
   }),
 
   getters: {
@@ -18,12 +22,17 @@ export const useProviderStore = defineStore("provider", {
   actions: {
     // ======= get =======
     async getProvider() {
-      this.isLoading = true
+      this.progress.start();
+      // this.isLoading = true;
       await Api.get("/provider").then((res) => {
-        this.isLoading = false;
+        this.progress.finish()
+        // this.isLoading = false;
         this.provider = res.data;
         // console.log(res.data);
-      });
+      }).catch(() => {
+        this.progress.fail()
+        // this.isLoading = false;
+      })
     },
     // ======== delete =======
     async delProvider(id) {

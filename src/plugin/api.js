@@ -10,6 +10,7 @@ export const Api = axios.create({
 Api.interceptors.request.use(
     (config) => {
       config.headers.Authorization = useAuthStore().getToken
+      // this.$progress.start()
       return config;
 },
     (error) => {
