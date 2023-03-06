@@ -3,12 +3,13 @@ import { defineStore } from "pinia";
 import { inject } from "vue";
 import { Api } from "../plugin/api";
 import { isLoading } from "./Loader"
+// import { Textsearch } from "../stores/search.js"
 
 export const useTransaksiStore = defineStore("transaksi", {
   state: () => ({
     allTransaksi: [],
     isLoading: isLoading,
-    progress: inject("progress")
+    progress: inject("progress"),
   }),
   getters: {
     jmlTransaksi() {
@@ -17,10 +18,14 @@ export const useTransaksiStore = defineStore("transaksi", {
   },
   actions: {
     // ========= get transaksi ====
-    async getTransaksi() {
-      this.progress.start();
-        await Api.get('/transaksi').then((res) => {
-            this.allTransaksi = res.data
+    async getTransaksi(textsearch) {
+      this.$state.progress.start();
+        await Api.get('/transaksi', {
+          params: {
+            search: textsearch,
+          }
+        }).then((res) => {
+            this.allTransaksi = res.data.data
             this.progress.finish()
         })
     },

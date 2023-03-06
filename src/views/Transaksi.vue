@@ -1,11 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import Modal from "../components/Modal.vue";
 import { useProviderStore, useTransaksiStore } from "../stores";
 import Swal from "sweetalert2";
+import { debounce } from "lodash";
+// import { Textsearch } from "../stores/search.js";
 
 const form = reactive({
+  search: "",
   idDetail: null,
   provider_id: "",
   no_hp: "",
@@ -77,7 +80,7 @@ const deleteTransaksi = (id) => {
 const showTransaksi = (id) => {
   useTransaksiStore()
     .showTransaksi(id)
-    .then((data) => {
+    .then(({ data }) => {
       form.edit_provider_id = data.provider_id;
       form.edit_no_hp = data.no_hp;
       form.edit_nominal = data.nominal;
@@ -105,6 +108,19 @@ const editTransaksi = () => {
       formatForm();
     });
 };
+// search transaksi
+const delaySearch = debounce((e) => {
+  form.search = e.target.value;
+}, 500);
+// watchEffect(() => {
+//   useTransaksiStore().getTransaksi(form.search);
+// });
+watch(
+  () => form.search,
+  (val) => {
+    useTransaksiStore().getTransaksi(val);
+  }
+);
 
 onMounted(() => {
   useTransaksiStore().getTransaksi();
@@ -114,7 +130,7 @@ onMounted(() => {
 <template>
   <div>
     <h3 class="text-success mb-4">Transaksi</h3>
-    <!-- {{ form.provider_id }} -->
+    <!-- {{ useTransaksiStore().searchTransaksi }} -->
     <div class="row">
       <div class="col-xl-12 col-12">
         <div class="card h-100 card-lg border-light">
@@ -134,6 +150,7 @@ onMounted(() => {
                     type="search"
                     class="form-control"
                     placeholder="Search"
+                    @input="delaySearch"
                   />
                 </form>
               </div>
