@@ -23,30 +23,30 @@ const onSubmit = (values) => {
 };
 </script>
 <template>
-  <section
-    class="login"
-    style="background-image: linear-gradient(60deg, green, yellow)"
-  >
+  <section class="login">
     <div class="row m-0 d-flex align-items-center" style="height: 100vh">
-      <div class="col-lg-4 mx-auto">
-        <div class="shadow-sm border rounded-3 p-4 bg-white">
-          <h4 class="text-dark text-center mb-4">Login Here</h4>
+      <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 mx-auto">
+        <div class="shadow-lg border rounded-3 p-4 bg-white">
+          <h3 class="text-dark mb-5">Login</h3>
           <Form
             @submit="onSubmit"
             :validation-schema="schema"
             v-slot="{ errors }"
           >
             <div class="mb-3">
-              <h6 for="email" class="form-label">Email</h6>
+              <h6 for="email" class="form-label">Email Address</h6>
               <Field
                 name="email"
                 type="email"
                 class="form-control"
                 :class="{ 'is-invalid': errors.email }"
                 id="email"
-                aria-placeholder="Masukkan email"
+                aria-placeholder="Email Address"
               />
               <ErrorMessage name="email" class="invalid-feedback" />
+              <div id="emailHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
             </div>
             <div class="mb-3">
               <h6 for="password" class="form-label">Password</h6>
@@ -56,9 +56,19 @@ const onSubmit = (values) => {
                 class="form-control"
                 :class="{ 'is-invalid': errors.password }"
                 id="password"
-                aria-placeholder="Masukkan password"
+                aria-placeholder="Password"
               />
               <ErrorMessage name="password" class="invalid-feedback" />
+            </div>
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Check me out</label
+              >
             </div>
             <button type="submit" class="btn btn-success mt-3">Sign In</button>
           </Form>

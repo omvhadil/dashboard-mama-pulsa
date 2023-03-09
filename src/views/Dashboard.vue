@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { onMounted } from "vue";
-import { useAuthStore, useProviderStore, useTransaksiStore } from "../stores";
+import { useProviderStore, useTransaksiStore } from "../stores";
 
 onMounted(() => {
   useProviderStore().getProvider();
@@ -10,61 +10,66 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    <h3 class="text-success m-0">Dashboard</h3>
-    <span class="text-small text-success"
-      >Hai {{ useAuthStore().user.name }}, Wellcome In Dashboard</span
-    >
+    <!-- ==== Banner === -->
+    <div class="card text-bg-dark border-0">
+      <img src="../assets/banner.png" class="card-img" alt="..." />
+      <div class="card-img-overlay">
+        <!-- <h3 class="card-title">Wellcome In Dashboard Mama Pulsa</h3>
+        <p class="card-text w-50">
+          This is a wider card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+        <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>
+
     <div class="row p-3 gy-4 mt-2">
       <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="shadow rounded-3">
-          <div class="bg-white p-3 d-flex">
-            <div class="fs-1 text-dark">
+        <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
+          <div class="bg-white d-flex">
+            <div class="text-dark">
+              <h5 class="m-0">Transaksi</h5>
+            </div>
+            <div
+              class="fs-3 text-success bg-success bg-opacity-25 d-flex align-items-center justify-content-center rounded-circle ms-auto"
+              style="width: 40px; height: 40px"
+            >
+              <i class="ri-exchange-dollar-line"></i>
+            </div>
+          </div>
+          <h2 class="text-dark">{{ useTransaksiStore().jmlTransaksi }}</h2>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
+          <div class="bg-white d-flex">
+            <div class="text-dark">
+              <h5 class="m-0">Provider</h5>
+            </div>
+            <div
+              class="fs-3 text-info bg-info bg-opacity-25 d-flex align-items-center justify-content-center rounded-circle ms-auto"
+              style="width: 40px; height: 40px"
+            >
               <i class="ri-shield-flash-line"></i>
             </div>
-            <div class="ms-auto text-dark">
-              <h3 class="m-0">{{ useTransaksiStore().jmlTransaksi }}</h3>
-              <p>Transaksi</p>
-            </div>
           </div>
-          <div class="bg-info-subtle text-info text-small p-1 text-center">
-            Total Transaksi
-          </div>
+          <h2 class="text-dark">{{ useProviderStore().jmlProvider }}</h2>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="shadow rounded-3">
-          <div class="bg-white p-3 d-flex">
-            <div class="fs-1 text-dark">
-              <i class="ri-shield-check-line"></i>
+        <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
+          <div class="bg-white d-flex">
+            <div class="text-dark">
+              <h5 class="m-0">Users</h5>
             </div>
-            <div class="ms-auto text-dark">
-              <h3 class="m-0">{{ useProviderStore().jmlProvider }}</h3>
-              <p>Provider</p>
-            </div>
-          </div>
-          <div
-            class="bg-success-subtle text-small p-1 text-center text-success"
-          >
-            Total Provider
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="shadow rounded-3">
-          <div class="bg-white p-3 d-flex">
-            <div class="fs-1 text-dark">
-              <i class="ri-shield-user-line"></i>
-            </div>
-            <div class="ms-auto text-dark">
-              <h3 class="m-0">0</h3>
-              <p>Admin</p>
+            <div
+              class="fs-3 text-warning bg-warning bg-opacity-25 d-flex align-items-center justify-content-center rounded-circle ms-auto"
+              style="width: 40px; height: 40px"
+            >
+              <i class="ri-creative-commons-by-line"></i>
             </div>
           </div>
-          <div
-            class="bg-warning-subtle text-small p-1 text-center text-warning"
-          >
-            Total Admin
-          </div>
+          <h2 class="text-dark">0</h2>
         </div>
       </div>
     </div>

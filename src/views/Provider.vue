@@ -111,21 +111,26 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div>
-    <h3 class="text-success mb-4">Provider</h3>
+  <div class="px-xl-3 px-0">
+    <!-- ==== Modal Tambah ==== -->
+    <div class="row mb-4 mt-xl-3">
+      <div class="col-6 col-xl-6 d-flex align-items-center">
+        <h3 class="text-success">Provider</h3>
+      </div>
+      <div class="col-6 col-xl-6">
+        <button
+          @click="showModal = true"
+          class="btn btn-success d-flex align-items-center ms-auto"
+        >
+          <i class="ri-add-line me-2"></i>Add Providers
+        </button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-xl-12 col-12">
-        <div class="card h-100 card-lg border-0">
+        <div class="card h-100 card-lg border-light">
           <div class="p-4">
-            <div class="row justify-content-between">
-              <div class="col-2">
-                <button
-                  @click="showModal = true"
-                  class="btn btn-success d-flex align-items-center"
-                >
-                  <i class="ri-add-line me-2"></i>Tambah
-                </button>
-              </div>
+            <div class="row row-gap-2 justify-content-between">
               <div class="col-7 col-xl-3">
                 <form action="" class="d-flex">
                   <input
@@ -134,6 +139,13 @@ onMounted(() => {
                     placeholder="Search"
                   />
                 </form>
+              </div>
+              <div class="col-7 col-xl-2 ms-xl-auto">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Status</option>
+                  <option value="1">Actived</option>
+                  <option value="2">Not Actived</option>
+                </select>
               </div>
             </div>
           </div>
@@ -162,7 +174,7 @@ onMounted(() => {
                     <td>{{ items.name }}</td>
                     <td>
                       <span :class="onStatus(items.active)">{{
-                        items.active
+                        items.active == "y" ? "Actived" : "Not Actived"
                       }}</span>
                     </td>
                     <td class="d-flex gap-1">

@@ -21,13 +21,11 @@ export const dataMenu = [
                 menu: 'Provider',
                 icon: 'ri-booklet-line',
                 path: '/provider',
-                action: {}
             },
             {
                 menu: 'Users',
                 icon: 'ri-user-3-line',
                 path: '/users',
-                action: {}
             },
         ]
     }

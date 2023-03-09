@@ -5,32 +5,44 @@ import Modal from "../components/Modal.vue";
 import { useProviderStore, useTransaksiStore } from "../stores";
 import Swal from "sweetalert2";
 import { debounce } from "lodash";
-// import { Textsearch } from "../stores/search.js";
-
-const form = reactive({
-  search: "",
-  idDetail: null,
-  provider_id: "",
-  no_hp: "",
-  nominal: "",
-  catatan: "",
-  status: "",
-  edit_provider_id: "",
-  edit_no_hp: "",
-  edit_nominal: "",
-  edit_catatan: "",
-  edit_status: "pending",
-});
 
 const showModal = ref();
 const showModalPut = ref();
+const data = reactive({
+  query: {
+    search: "",
+    page: 1,
+    per_page: 10,
+  },
+  formAdd: {
+    provider_id: "",
+    no_hp: "",
+    nominal: "",
+    catatan: "",
+    status: "pending",
+  },
+  formEdit: {
+    edit_provider_id: "",
+    edit_no_hp: "",
+    edit_nominal: "",
+    edit_catatan: "",
+    edit_status: "",
+  },
+  idDetail: null,
+});
+// fromat form
 const formatForm = () => {
-  form.provider_id = null;
-  form.no_hp = null;
-  form.nominal = null;
-  form.catatan = null;
-  form.status = null;
+  data.formAdd.provider_id = null;
+  data.formAdd.no_hp = null;
+  data.formAdd.nominal = null;
+  data.formAdd.catatan = null;
+  data.formAdd.status = null;
 };
+// pagination
+const paginate = (item) => {
+  data.query.page = item;
+};
+// styling status
 const onStatus = (status) => {
   switch (status) {
     case "pending":
@@ -46,7 +58,7 @@ const onStatus = (status) => {
 // tambah transaksi
 const addTransaksi = () => {
   useTransaksiStore()
-    .postTransaksi(form)
+    .postTransaksi(data.formAdd)
     .then(() => {
       showModal.value = false;
       formatForm();
@@ -81,24 +93,24 @@ const showTransaksi = (id) => {
   useTransaksiStore()
     .showTransaksi(id)
     .then(({ data }) => {
-      form.edit_provider_id = data.provider_id;
-      form.edit_no_hp = data.no_hp;
-      form.edit_nominal = data.nominal;
-      form.edit_catatan = data.catatan;
-      form.edit_status = data.status;
+      data.formEdit.edit_provider_id = data.provider_id;
+      data.formEdit.edit_no_hp = data.no_hp;
+      data.formEdit.edit_nominal = data.nominal;
+      data.formEdit.edit_catatan = data.catatan;
+      data.formEdit.edit_status = data.status;
+      data.formEdit.idDetail = id;
       showModalPut.value = true;
-      form.idDetail = id;
     });
 };
 // put transaksi
 const editTransaksi = () => {
-  const id = form.idDetail;
+  const id = data.idDetail;
   const formPut = {
-    provider_id: form.edit_provider_id,
-    no_hp: form.edit_no_hp,
-    nominal: form.edit_nominal,
-    catatan: form.edit_catatan,
-    status: form.edit_status,
+    provider_id: data.formEdit.edit_provider_id,
+    no_hp: data.formEdit.edit_no_hp,
+    nominal: data.formEdit.edit_nominal,
+    catatan: data.formEdit.edit_catatan,
+    status: data.formEdit.edit_status,
   };
   useTransaksiStore()
     .putTransaksi(id, formPut)
@@ -108,42 +120,45 @@ const editTransaksi = () => {
       formatForm();
     });
 };
-// search transaksi
+// debounce search
 const delaySearch = debounce((e) => {
-  form.search = e.target.value;
+  data.query.search = e.target.value;
 }, 500);
-// watchEffect(() => {
-//   useTransaksiStore().getTransaksi(form.search);
-// });
+// watch
 watch(
-  () => form.search,
-  (val) => {
-    useTransaksiStore().getTransaksi(val);
+  () => data.query.search || data.query.page || data.query.perPage,
+  () => {
+    useTransaksiStore().getTransaksi(data.query);
   }
 );
-
 onMounted(() => {
   useTransaksiStore().getTransaksi();
   useProviderStore().getProvider();
 });
 </script>
 <template>
-  <div>
-    <h3 class="text-success mb-4">Transaksi</h3>
-    <!-- {{ useTransaksiStore().searchTransaksi }} -->
+  <div class="px-xl-3 px-0">
+    <!-- ==== Modal Tambah ==== -->
+    <div class="row mb-4 mt-xl-3">
+      <div class="col-6 col-xl-6 d-flex align-items-center">
+        <h3 class="text-success">Transaksi</h3>
+      </div>
+      <div class="col-6 col-xl-6">
+        <button
+          @click="showModal = true"
+          class="btn btn-success d-flex align-items-center ms-auto"
+        >
+          <i class="ri-add-line me-2"></i>Add Transaksi
+        </button>
+      </div>
+    </div>
+    <!-- ==== container Table ==== -->
     <div class="row">
       <div class="col-xl-12 col-12">
         <div class="card h-100 card-lg border-light">
           <div class="p-4">
-            <div class="row justify-content-between">
-              <div class="col-2">
-                <button
-                  @click="showModal = true"
-                  class="btn btn-success d-flex align-items-center"
-                >
-                  <i class="ri-add-line me-2"></i>Tambah
-                </button>
-              </div>
+            <div class="row row-gap-2 justify-content-between">
+              <!-- ==== Searching ====  -->
               <div class="col-7 col-lg-3">
                 <form action="" class="d-flex">
                   <input
@@ -153,6 +168,23 @@ onMounted(() => {
                     @input="delaySearch"
                   />
                 </form>
+              </div>
+              <!-- ==== Filter ==== -->
+              <div class="col-7 col-xl-2 ms-xl-auto">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Provider</option>
+                  <option value="1">Telkomsel</option>
+                  <option value="2">Im3</option>
+                  <option value="3">Xl</option>
+                </select>
+              </div>
+              <div class="col-7 col-xl-2">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Status</option>
+                  <option value="1">success</option>
+                  <option value="2">failed</option>
+                  <option value="3">pending</option>
+                </select>
               </div>
             </div>
           </div>
@@ -174,9 +206,11 @@ onMounted(() => {
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in useTransaksiStore().allTransaksi"
+                    v-for="(item, index) in useTransaksiStore().allTransaksi
+                      .data"
                     :key="item.id"
                     @dblclick="showTransaksi(item.id)"
+                    role="button"
                   >
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ item.provider_name }}</td>
@@ -201,6 +235,38 @@ onMounted(() => {
               </table>
             </div>
           </div>
+          <!-- ==== pagination ==== -->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a
+                  class="page-link text-success"
+                  href="#"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li
+                v-for="(itm, idx) in useTransaksiStore().allTransaksi
+                  .total_page"
+                :key="idx"
+                class="page-item"
+              >
+                <a
+                  class="page-link text-success"
+                  @click="paginate(itm)"
+                  href="#"
+                  >{{ itm }}</a
+                >
+              </li>
+              <li class="page-item">
+                <a class="page-link text-success" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

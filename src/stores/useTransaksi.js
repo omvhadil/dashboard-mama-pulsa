@@ -7,25 +7,26 @@ import { isLoading } from "./Loader"
 
 export const useTransaksiStore = defineStore("transaksi", {
   state: () => ({
-    allTransaksi: [],
+    allTransaksi: {},
     isLoading: isLoading,
     progress: inject("progress"),
+    page: 1,
   }),
   getters: {
     jmlTransaksi() {
-      return this.allTransaksi.length
+      return this.allTransaksi.total_data
     }
   },
   actions: {
     // ========= get transaksi ====
-    async getTransaksi(textsearch) {
+    async getTransaksi(query) {
       this.$state.progress.start();
         await Api.get('/transaksi', {
           params: {
-            search: textsearch,
+            ...query
           }
         }).then((res) => {
-            this.allTransaksi = res.data.data
+            this.allTransaksi = res.data
             this.progress.finish()
         })
     },

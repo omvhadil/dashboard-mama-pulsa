@@ -1,11 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { RouterLink } from "vue-router";
 import { dataMenu } from "../constans";
 import { useAuthStore } from "../stores";
 </script>
 <template>
-  <nav class="navbar-vertical-nav d-none d-md-block position-fixed">
+  <nav class="navbar-vertical-nav d-none d-md-block position-fixed z-2">
     <div class="navbar-vertical bg-white border-end">
       <div class="p-3">
         <a

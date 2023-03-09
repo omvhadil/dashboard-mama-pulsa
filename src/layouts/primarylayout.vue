@@ -1,18 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Sidebar from "../components/sidebar.vue";
-// import SidebarMobille from "../components/SidebarMobile.vue";
 import { RouterView } from "vue-router";
 import Header from "../components/Header.vue";
 </script>
 
 <template>
+  <Header />
   <div class="wrapper overflow-y-hidden">
-    <!-- <SidebarMobille /> -->
     <Sidebar />
 
     <div class="container-content">
-      <Header />
       <div class="container p-3">
         <router-view v-slot="{ Component }">
           <transition name="slide-right">
@@ -31,6 +29,7 @@ import Header from "../components/Header.vue";
   min-height: 100%;
 }
 .container-content {
+  padding: 5rem 0 5rem 0;
   width: calc(100% - 250px);
   margin-left: 250px;
 }

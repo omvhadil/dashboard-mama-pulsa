@@ -4,8 +4,6 @@ import { inject } from "vue";
 import { Api } from "../plugin/api";
 import {isLoading} from "./Loader"
 
-// let progress = inject("progress")
-
 export const useProviderStore = defineStore("provider", {
   state: () => ({
     provider: [],

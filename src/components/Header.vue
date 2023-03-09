@@ -10,26 +10,31 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="row m-0 shadow-sm p-2">
-    <div class="col-1 fs-4 d-lg-none">
-      <button
-        class="border-0 bg-white"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
+  <section class="header">
+    <div class="row bg-white w-100 m-0 p-3 z-1 shadow-sm position-fixed">
+      <div class="col-1 fs-4 d-lg-none">
+        <button
+          class="border-0 bg-white"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample"
+        >
+          <i class="ri-align-justify"></i>
+        </button>
+      </div>
+      <div
+        class="col-10 col-lg-5 d-flex align-items-center gap-1 p-1 text-dark ms-auto"
+        style="cursor: pointer"
       >
-        <i class="ri-align-justify"></i>
-      </button>
+        <p class="m-0 ms-auto">
+          Hi, {{ useAuthStore().user.name
+          }}<i class="ri-arrow-drop-down-line"></i>
+        </p>
+      </div>
     </div>
-    <div
-      class="col-7 col-lg-5 d-flex align-items-center gap-1 p-1 text-dark ms-auto"
-      style="cursor: pointer"
-    >
-      <i class="ri-shield-user-line ms-auto"></i>{{ useAuthStore().user.name
-      }}<i class="ri-arrow-drop-down-line"></i>
-    </div>
-  </div>
+  </section>
+
   <!-- ===== Sidebar ===== -->
   <div
     class="offcanvas offcanvas-start"
@@ -56,7 +61,7 @@ onMounted(() => {
         <ul class="navbar-nav flex-column px-3 row-gap-1">
           <div v-for="(item, index) in dataMenu" :key="index">
             <h6>{{ item.title }}</h6>
-            <li class="nav-item">
+            <li class="nav-item" data-bs-dismiss="offcanvas" aria-label="Close">
               <RouterLink
                 v-for="(items, idx) in dataMenu[index].menus"
                 :key="idx"
@@ -81,6 +86,9 @@ onMounted(() => {
   </div>
 </template>
 <style scoped>
+.header {
+  width: calc(100% - 250px);
+}
 .offcanvas {
   max-width: 60%;
 }
