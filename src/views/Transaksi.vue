@@ -6,8 +6,6 @@ import { useProviderStore, useTransaksiStore } from "../stores";
 import Swal from "sweetalert2";
 import { debounce } from "lodash";
 
-const showModal = ref();
-const showModalPut = ref();
 const data = reactive({
   query: {
     search: "",
@@ -21,15 +19,15 @@ const data = reactive({
     catatan: "",
     status: "pending",
   },
-  formEdit: {
-    edit_provider_id: "",
-    edit_no_hp: "",
-    edit_nominal: "",
-    edit_catatan: "",
-    edit_status: "",
-  },
+  edit_provider_id: "",
+  edit_no_hp: "",
+  edit_nominal: "",
+  edit_catatan: "",
+  edit_status: "",
   idDetail: null,
 });
+const showModal = ref();
+const showModalPut = ref();
 // fromat form
 const formatForm = () => {
   data.formAdd.provider_id = null;
@@ -93,13 +91,13 @@ const showTransaksi = (id) => {
   useTransaksiStore()
     .showTransaksi(id)
     .then(({ data }) => {
-      data.formEdit.edit_provider_id = data.provider_id;
-      data.formEdit.edit_no_hp = data.no_hp;
-      data.formEdit.edit_nominal = data.nominal;
-      data.formEdit.edit_catatan = data.catatan;
-      data.formEdit.edit_status = data.status;
-      data.formEdit.idDetail = id;
+      data.edit_provider_id = data.data.provider_id;
+      data.edit_no_hp = data.no_hp;
+      data.edit_nominal = data.nominal;
+      data.edit_catatan = data.catatan;
+      data.edit_status = data.status;
       showModalPut.value = true;
+      data.idDetail = id;
     });
 };
 // put transaksi
@@ -282,7 +280,7 @@ onMounted(() => {
                 >Provider</label
               >
               <select
-                v-model="form.provider_id"
+                v-model="data.formAdd.provider_id"
                 class="form-select"
                 aria-label="Default select example"
               >
@@ -303,7 +301,7 @@ onMounted(() => {
                 >No Telephone</label
               >
               <input
-                v-model="form.no_hp"
+                v-model="data.formAdd.no_hp"
                 type="number"
                 class="form-control"
                 id="provider"
@@ -314,7 +312,7 @@ onMounted(() => {
                 >Nominal</label
               >
               <input
-                v-model="form.nominal"
+                v-model="data.formAdd.nominal"
                 type="number"
                 class="form-control"
                 id="provider"
@@ -325,7 +323,7 @@ onMounted(() => {
                 >Catatan</label
               >
               <textarea
-                v-model="form.catatan"
+                v-model="data.formAdd.catatan"
                 class="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
@@ -347,7 +345,7 @@ onMounted(() => {
                 >Provider</label
               >
               <select
-                v-model="form.edit_provider_id"
+                v-model="data.edit_provider_id"
                 class="form-select"
                 aria-label="Default select example"
               >
@@ -368,7 +366,7 @@ onMounted(() => {
                 >No Telephone</label
               >
               <input
-                v-model="form.edit_no_hp"
+                v-model="data.edit_no_hp"
                 type="number"
                 class="form-control"
                 id="provider"
@@ -379,7 +377,7 @@ onMounted(() => {
                 >Nominal</label
               >
               <input
-                v-model="form.edit_nominal"
+                v-model="data.edit_nominal"
                 type="number"
                 class="form-control"
                 id="provider"
@@ -390,7 +388,7 @@ onMounted(() => {
                 >Catatan</label
               >
               <textarea
-                v-model="form.edit_catatan"
+                v-model="data.edit_catatan"
                 class="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
@@ -405,7 +403,7 @@ onMounted(() => {
                   name="inlineRadioOptions"
                   id="failed"
                   value="failed"
-                  v-model="form.edit_status"
+                  v-model="data.edit_status"
                 />
                 <label class="form-check-label" for="failed">Failed</label>
               </div>
@@ -416,7 +414,7 @@ onMounted(() => {
                   name="inlineRadioOptions"
                   id="pending"
                   value="pending"
-                  v-model="form.edit_status"
+                  v-model="data.edit_status"
                 />
                 <label class="form-check-label" for="pending">Pending</label>
               </div>
@@ -427,7 +425,7 @@ onMounted(() => {
                   name="inlineRadioOptions"
                   id="success"
                   value="success"
-                  v-model="form.edit_status"
+                  v-model="data.edit_status"
                 />
                 <label class="form-check-label" for="success">Success</label>
               </div>

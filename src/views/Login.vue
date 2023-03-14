@@ -31,7 +31,7 @@ const onSubmit = (values) => {
           <Form
             @submit="onSubmit"
             :validation-schema="schema"
-            v-slot="{ errors }"
+            v-slot="{ errors, meta }"
           >
             <div class="mb-3">
               <h6 for="email" class="form-label">Email Address</h6>
@@ -70,7 +70,13 @@ const onSubmit = (values) => {
                 >Check me out</label
               >
             </div>
-            <button type="submit" class="btn btn-success mt-3">Sign In</button>
+            <button
+              type="submit"
+              class="btn btn-success mt-3"
+              :disabled="!meta.valid"
+            >
+              Sign In
+            </button>
           </Form>
         </div>
       </div>

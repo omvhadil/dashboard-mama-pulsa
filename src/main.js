@@ -8,7 +8,10 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "remixicon/fonts/remixicon.css";
 import Vue3ProgressBar from "@dzunn86/vue3-progress";
 import './assets/main.css'
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 const app = createApp(App)
 
 app.use(createPinia())

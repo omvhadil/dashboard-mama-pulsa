@@ -8,10 +8,11 @@ onMounted(() => {
   useTransaksiStore().getTransaksi();
 });
 </script>
+
 <template>
   <div>
     <!-- ==== Banner === -->
-    <div class="card text-bg-dark border-0">
+    <div data-aos="zoom-in" class="card text-bg-dark border-0">
       <img src="../assets/banner.png" class="card-img" alt="..." />
       <div class="card-img-overlay">
         <!-- <h3 class="card-title">Wellcome In Dashboard Mama Pulsa</h3>
@@ -24,7 +25,7 @@ onMounted(() => {
     </div>
 
     <div class="row p-3 gy-4 mt-2">
-      <div class="col-lg-4 col-md-6 col-sm-12">
+      <div data-aos="fade-down" class="col-lg-4 col-md-6 col-sm-12">
         <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
           <div class="bg-white d-flex">
             <div class="text-dark">
@@ -40,7 +41,7 @@ onMounted(() => {
           <h2 class="text-dark">{{ useTransaksiStore().jmlTransaksi }}</h2>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
+      <div data-aos="fade-down" class="col-lg-4 col-md-6 col-sm-12">
         <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
           <div class="bg-white d-flex">
             <div class="text-dark">
@@ -56,7 +57,7 @@ onMounted(() => {
           <h2 class="text-dark">{{ useProviderStore().jmlProvider }}</h2>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
+      <div data-aos="fade-down" class="col-lg-4 col-md-6 col-sm-12">
         <div class="shadow-lg rounded-3 overflow-hidden p-3 py-4">
           <div class="bg-white d-flex">
             <div class="text-dark">
